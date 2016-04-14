@@ -3,27 +3,30 @@ $:.push File.expand_path("../lib", __FILE__)
 require "paperclip-meta/version"
 
 Gem::Specification.new do |s|
-  s.name          = "paperclip-meta"
-  s.version       = Paperclip::Meta::VERSION
-  s.authors       = ["Alexey Bondar", "Tee Parham"]
-  s.email         = ["y8@ya.ru", "tee@neighborland.com"]
-  s.homepage      = "http://github.com/teeparham/paperclip-meta"
-  s.summary       = "Add width, height, and size to paperclip images"
-  s.description   = "Add width, height and size methods to paperclip images"
-  s.license       = "MIT"
+  s.name        = "paperclip-meta"
+  s.version     = Paperclip::Meta::VERSION
+  s.authors     = ["Alexey Bondar"]
+  s.email       = ["y8@ya.ru"]
+  s.homepage    = "http://github.com/y8/paperclip-meta"
+  s.summary     = %q{Thumbnail dimensions for paperclip}
+  s.description = %q{Add width, height and size methods to paperclip thumbnails}
+
+  s.rubyforge_project = "paperclip-meta"
 
   s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec}/*`.split("\n")
-  s.executables   = []
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.required_ruby_version = ">= 2.0.0"
+  # Development depensencies
+  s.add_development_dependency "bundler", ">= 1.0.0"
+  s.add_development_dependency "rake"
+  s.add_development_dependency "paperclip"
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "activerecord"
+  s.add_development_dependency "activerecord-jdbcsqlite3-adapter" if RUBY_PLATFORM == 'java'
+  s.add_development_dependency "sqlite3-ruby"
 
-  s.add_dependency "paperclip", ">= 3.0.2", "< 5.0"
-
-  s.add_development_dependency "bundler", "~> 1.5"
-  s.add_development_dependency "rake", "~> 10.4"
-  s.add_development_dependency "mocha", "~> 1.0"
-  s.add_development_dependency "activerecord", ">= 4.0"
-  s.add_development_dependency "sqlite3", ">= 1.3.10"
+  # Runtime dependencies
+  s.add_runtime_dependency "paperclip"
 end
